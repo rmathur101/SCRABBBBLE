@@ -16,12 +16,32 @@ var make_cells_droppable = function() {
           $(current_tile).css( {left: '0px', top: '0px'} );
           $(current_tile).detach().appendTo(this);
           $(this).droppable('disable');
+          var cellstring = this.id;
+          var coord = cellstring.match(/\d{1,2}x\d{1,2}/)[0];
+          var coord = coord.split("x");
+          var x = parseInt(coord[0]);
+          var y = parseInt(coord[1]);
+          activateSquares(x , y);
         }
       });
-      $(this).droppable('enable');
+      $(this).droppable('disable');
     }
   });
+  $("#cell_7x7").droppable('enable');
 };
+
+function activateSquares(x, y){
+  var box1 = "#cell_" + (x + 1) + "x" + y;
+  var box2 = "#cell_" + (x - 1) + "x" + y;
+  var box3 = "#cell_" + x + "x" + (y + 1);
+  var box4 = "#cell_" + x + "x" + (y - 1);
+
+  $(box1).droppable('enable');
+  $(box2).droppable('enable');
+  $(box3).droppable('enable');
+  $(box4).droppable('enable');
+}
+
 
 var on_tile_grab = function(f) { $('.tile').on( 'mousedown', f ) };
 var define_current_tile = function(e) {

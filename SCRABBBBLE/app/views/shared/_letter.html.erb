@@ -1,0 +1,9 @@
+<div class="letter">
+  <div class="title-letter"><p><%= letter %></p></div>
+  <% if tile = Tile.find_by_letter(letter.upcase) %>
+    <% value = tile.value %>
+  <% else %>
+    <% value = "?" %>
+  <% end %>
+  <div class="title-value"><%= value %></div>
+</div>
